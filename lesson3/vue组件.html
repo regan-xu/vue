@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+	<div id="box">
+		<aaa></aaa>
+		<bbb></bbb>
+		<my-aaa></my-aaa>
+		<my-aaa2></my-aaa2>
+		<!--动态组件-->
+		<input type="button" @click="name='aaa'" value="aaa组件">
+		<input type="button" @click="name='bbb'" value="bbb组件">
+		<component :is="name"></component>
+	</div>
+
+	<!--定义模板方法一-->
+	<script type="x-template" id="my-template">
+		<h2 @click="change">my-template组件</h2>
+		<ul>
+			<li>1111</li>
+			<li>222</li>
+			<li>3333</li>
+			<li>1111</li>
+		</ul>
+	</script>
+	<!--定义模板方法二-->
+	<template id="my-template2">
+		<h1>my-template2组件</h1>
+		<ul>
+			<li v-for="val in arr">
+				{{val}}
+			</li>
+		</ul>
+	</template>
+
+	<script>
+		//全局组件
+        Vue.component('bbb',{
+            template:'<h4>我是标题bbb组件</h4>'
+        });
+
+
+		var Aaa=Vue.extend({
+			//data必须是函数的形式，函数必须返回一个对象(json)
+            data(){
+                return {
+                    msg:'我是aaa组件^^'
+                };
+            },
+            methods:{
+                change(){
+                    this.msg='changed';
+                }
+            },
+			template:'<h3 @click="change">{{msg}}</h3>'
+		});
+
+
+		var vm=new Vue({
+			el:'#box',
+			data:{
+                name:'aaa'
+			},
+			components:{//局部组件
+			    aaa:Aaa,
+				'my-aaa':{
+			        template:'#my-template'
+				},
+                'my-aaa2':{
+                    data(){
+                        return {
+                            msg:'welcome vue',
+                            arr:['apple','banana','orange']
+                        }
+                    },
+                    methods:{
+                        change(){
+                            this.msg='changed';
+                        }
+                    },
+                    template:'#my-template2'
+                }
+			}
+		});
+
+	</script>
+
+</body>
+</html>

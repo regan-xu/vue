@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue属性</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            background: blue;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+                    url:'https://www.baidu.com/img/bd_logo1.png',
+                    w:'200px',
+                    t:'title',
+                    r:'red',
+                    b:'blue',
+                    bFlag:false,
+                    colorJson:{
+                        red:false,
+                        blue:true
+                    },
+                    cJson:{color:'red'},
+                    bJson:{backgroundColor:'blue'},
+                    cbJson:{
+                        color:'red',
+                        backgroundColor:'blue'
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <!--<img src="{{url}}" alt="">--><!--这个效果能出来，但是会报一个404错误-->
+        <!--<img v-bind:src="url" alt="">-->
+        <img :src="url" alt="" :width="w" :title="t"><!--简写-->
+        <br>
+        <strong :class="[r,b]">文字1</strong>
+        <strong :class="{red:true,blue:bFlag}">文字2</strong>
+        <strong :class="colorJson">文字3</strong>
+        <br>
+        <strong :style="{color:'red'}">文字4</strong>
+        <strong :style="[cJson,bJson]">文字5</strong>
+        <strong :style="cbJson">文字6</strong>
+    </div>
+</body>
+</html>

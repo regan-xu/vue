@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue循环-重复数据</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="添加" @click="add()">
+        <ul>
+            <li v-for="val in arr" track-by="$index">{{val}}</li><!--track-by会提高循环的性能-->
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            data:{
+                arr:['apple','pear','orange']
+            },
+            methods:{
+                add:function () {
+                    this.arr.push('tomato');
+                    alert(this.arr);
+                }
+            }
+        }).$mount('#box');
+    </script>
+</body>
+</html>

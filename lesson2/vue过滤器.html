@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue过滤器</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!--debounce配合事件，延迟执行-->
+        <input type="text" @keyup="show | debounce 2000">
+        <br>
+        <!--limitBy 第一个参数是取机构 第二个参数是从哪开始-->
+        <ul>
+            <li v-for="val in arr | limitBy 2">{{val}}</li>
+        </ul>
+        <ul>
+            <li v-for="val in arr | limitBy 2 arr.length-2">{{val}}</li>
+        </ul>
+        <br>
+        <!--filterBy 过滤数据-->
+        <input type="text" v-model="word">
+        <ul>
+            <li v-for="val in arr2 | filterBy word">{{val}}</li>
+        </ul>
+        <br>
+        <!--orderBy 1正序 -1倒序-->
+        <ul>
+            <li v-for="val in arr2 | orderBy -1">{{val}}</li>
+        </ul>
+
+        <br>
+        <!--自定义过滤器-->
+        {{a | toDou 1 2}}
+        <br>
+        {{date | date}}
+        <br><!--双向过滤器-->
+        <input type="text" v-model="msg | filterHtml">
+        <br>
+        <div v-html="msg"></div>
+    </div>
+
+    <script>
+        Vue.filter('toDou',function (input,a,b) {
+            // alert(a+''+b);
+            return input<10?'0'+input:''+input;
+        });
+
+        Vue.filter('date',function (input) {
+           var oDate = new Date(input);
+           return oDate.getFullYear()+'-'+(oDate.getMonth()+1)+''+oDate.getDate()
+            +' '+oDate.getHours()+':'+oDate.getHours()+":"+oDate.getSeconds();
+        });
+
+        Vue.filter('filterHtml',{
+            read:function (input) {//model-view
+                return input.replace(/<[^<]+>/g,'');
+            },
+            write:function (val) {//view-model
+                
+            }
+        });
+
+        var vm = new Vue({
+            data:{
+                arr:[1,2,3,4,5],
+                arr2:['width','height','background','orange'],
+                word:'',
+                a:9,
+                date:Date.now(),
+                msg:'<strong>welcome</strong>'
+            },
+            methods:{
+                show:function () {
+                    alert(1);
+                }
+            }
+        }).$mount('#box');
+    </script>
+</body>
+</html>

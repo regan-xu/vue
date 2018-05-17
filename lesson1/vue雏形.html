@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue雏形</title>
+    <script src="vue.js"></script>
+    <script>
+        //el的#后接id    .后接class    或者直接标签
+        //vue里字符串要用单引号引起来
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+                    msg:'id:welcome vue'
+                }
+            });
+            new Vue({
+                el:'.box',
+                data:{
+                    msg:'class:welcome vue'
+                }
+            });
+            new Vue({
+                el:'body',
+                data:{
+                    msg1:'body:welcome vue',
+                    msg2:12,
+                    msg3:true,
+                    arr:['apple','banana','orange','pear'],
+                    json:{a:'apple',b:'banana',c:'orange'}
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <label>
+            <input type="text" v-model="msg">
+        </label>
+        <br>
+        {{msg}}
+        <br>
+        {{*msg}} <!--加了*则数据只绑定一次-->
+        <br>
+        {{{msg}}} <!--HTML转义输出-->
+        <br>
+    </div>
+    <br>
+    <div class="box">
+        {{msg}}
+    </div>
+    {{msg1}}
+    <br>
+    {{msg2}}
+    <br>
+    {{msg3}}
+    <br>
+    {{arr}}
+    <br>
+    {{json}}
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue实例简单方法</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+            {{a}}
+    </div>
+    <div id="box2">
+        {{a}}
+    </div>
+    <script>
+        var vm = new Vue({
+            data:{
+                a:1
+            }
+        });
+        // vm.$el -> 就是元素
+        // vm.$data -> 就是data
+        vm.$mount('#box');//手动挂载
+
+        var vm2 = new Vue({
+            aa:11,//自定义属性
+            show:function(){
+                alert(1);
+            },
+            data:{
+                a:1,
+                b:2
+            }
+        }).$mount('#box2');
+        vm2.$options.show();//获取自定义属性
+        // vm.$destroy()//销毁对象
+        // vm.$log();//查看现在数据的状态
+    </script>
+</body>
+</html>

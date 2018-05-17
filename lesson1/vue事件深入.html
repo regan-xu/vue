@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue时间深入</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+
+                },
+                methods:{
+                    show:function (ev,n) {
+                        alert(n);
+                        ev.cancelBubble=true;//阻止冒泡，这里是阻止外层的调用show2
+                    },
+                    show2:function () {
+                        alert('show2');
+                    },
+                    show3:function () {
+                        alert('show3');
+                    },
+                    show4:function (ev) {
+                        alert('show4');
+                        ev.preventDefault();//阻止默认行为,这里是阻止右击后出现系统的菜单
+                    },
+                    show5:function (ev) {
+                        alert(ev.keyCode);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div @click="show2()">
+            <input type="button" value="按钮1" @click="show($event,-1)">
+            <!--推荐用.stop这个阻止冒泡-->
+            <input type="button" value="按钮2" @click.stop="show3()">
+        </div>
+
+        <input type="button" value="按钮3" @contextmenu="show4($event)">
+        <!--推荐用.prevent阻止默认行为-->
+        <input type="button" value="按钮3" @contextmenu.prevent="show3()">
+
+        <br>
+        <!--键盘事件-->
+        <input type="text" @keydown="show5($event)">
+        <input type="text" @keyup="show5($event)">
+        <!--回车触发-->
+        <input type="text" @keyup.13="show5($event)">
+        <input type="text" @keyup.enter="show5($event)"><!--left right up down-->
+    </div>
+</body>
+</html>

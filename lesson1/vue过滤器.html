@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue过滤器</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <!--{{msg| filterA | filterB}}-->
+        {{'welcome'|uppercase}}
+        <br>
+        {{'WELCOME'|lowercase}}
+        <br>
+        {{'WELCOME'|lowercase|capitalize}}
+        <br>
+        <!--{{msg| filterA 参数}}  currency：钱-->
+        {{12|currency '￥'}}
+    </div>
+</body>
+</html>

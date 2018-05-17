@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue自定义指令</title>
+    <style>
+        zns-red{
+            width:100px;
+            background: gray;
+            height:100px;
+            display: block;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        //这里的指令名是取到v-后的
+        Vue.directive('red',function(color){
+            this.el.style.background=color;
+        });
+
+        Vue.directive('drag',function(){
+            var oDiv=this.el;
+            oDiv.onmousedown=function(ev){
+                var disX=ev.clientX-oDiv.offsetLeft;
+                var disY=ev.clientY-oDiv.offsetTop;
+
+                document.onmousemove=function(ev){
+                    var l=ev.clientX-disX;
+                    var t=ev.clientY-disY;
+                    oDiv.style.left=l+'px';
+                    oDiv.style.top=t+'px';
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+            };
+        });
+
+        //元素指令
+        Vue.elementDirective('zns-red',{
+            bind:function(){
+                this.el.style.background='red';
+            }
+        });
+
+        window.onload = function () {
+            var vm = new Vue({
+                el:'#box',
+                data:{
+                    msg:'a',
+                    c:'red'
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <!--自定义指令必须以v-开头-->
+        <span v-red="c">aa</span>
+        <div v-drag :style="{width:'100px', height:'100px', background:'red', position:'absolute', right:0, top:30}"></div>
+        <div v-drag :style="{width:'100px', height:'100px', background:'blue', position:'absolute', left:0, top:30}"></div>
+        <zns-red></zns-red>
+    </div>
+
+</body>
+</html>

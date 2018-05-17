@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue交互</title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+
+                },
+                methods:{
+                    get:function () {
+                        this.$http.get('a.txt').then(function (res) {
+                            alert(res.data);//成功
+                        },function (res) {
+                            alert(res.status);//失败
+                        });
+                    },
+                    getPHP:function(){
+                        this.$http.get('get.php',{
+                            a:1,
+                            b:2
+                        }).then(function(res){
+                            alert(res.data);
+                        },function(res){
+                            alert(res.status);
+                        });
+                    },
+                    postPHP:function(){
+                        this.$http.post('post.php',{
+                            a:1,
+                            b:20
+                        },{
+                            emulateJSON:true
+                        }).then(function(res){
+                            alert(res.data);
+                        },function(res){
+                            alert(res.status);
+                        });
+                    },
+                    jsonp:function(){
+                        this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+                            wd:'a'
+                        },{
+                            jsonp:'cb' //callback,默认名字就是callback
+                        }).then(function(res){
+                            alert(res.data.s);
+                        },function(res){
+                            alert(res.status);
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="按钮1" @click="get()">
+        <input type="button" value="按钮2" @click="getPHP()">
+        <input type="button" value="按钮3" @click="postPHP()">
+        <input type="button" value="按钮4" @click="jsonp()">
+    </div>
+</body>
+</html>

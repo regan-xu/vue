@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue基础事件</title>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el:'#box',
+                data:{
+                    arr:['apple','banana','orange','pear'],
+                    json:{a:'apple',b:'banana',c:'orange'},
+                    flag:true
+                },
+                methods:{
+                    show:function () {
+                        alert(1);
+                    },
+                    add:function () {
+                        this.arr.push('tomoto');
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="弹出" v-on:click="show()">
+        <br>
+        <input type="button" value="添加" v-on:click="add()">
+        <br>
+        <ul>
+            <li v-for="value in arr">
+                {{value}}
+            </li>
+        </ul>
+        <br>
+        <input type="button" value="点击消失" v-on:click="flag=false">
+        <div style="width:100px;height: 100px;background: red" v-show="flag">
+
+        </div>
+    </div>
+</body>
+</html>

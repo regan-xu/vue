@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue防止闪烁</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <span>{{msg}}</span>
+        <span v-text="msg"></span>
+        <br>
+        <span>{{{msg2}}}</span>
+        <span v-html="msg2"></span>
+    </div>
+    <script>
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'welcome',
+                msg2:'<strong>welcome<strong>'
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue父子组件</title>
+	<script src="bower_components/vue/dist/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+<div id="box">
+	<aaa>
+	</aaa>
+</div>
+
+<template id="aaa">
+	<span>我是父级->{{msg}}</span>
+    <input type="button" value="按钮">
+    <!--这里my-msg用-连接，在components中(props和template中)要改成驼峰-->
+    <!--这里的child-msg是子主键$emit方法的第一个参数定的事件名，get是父组件的方法名-->
+	<bbb :mmm="msg2" :my-msg="msg" @child-msg="get"></bbb>
+
+</template>
+<template id="bbb">
+    <h3>子主键</h3>
+    <h3>我是bbb组件->{{mmm}} <br> {{myMsg}}<br>{{a}}</h3>
+    <input type="button" value="send" @click="send">
+</template>
+
+<script>
+    var vm=new Vue({
+        el:'#box',
+        data:{
+            a:'aaa'
+        },
+        components:{
+            'aaa':{
+                data(){
+                    return {
+                        msg:111,
+                        msg2:'我是父组件的数据'
+                    }
+                },
+                template:'#aaa',
+                methods:{
+                    get(msg){
+                        this.msg=msg;
+                    }
+                },
+                components:{
+                    'bbb':{
+                        data(){
+                            return{
+                                a:'我是子组件的数据'
+                            }
+                        },
+                        // props:['mmm','myMsg'],//这里驼峰形式
+                        props:{//另一种方式
+                            'mmm':String,
+                            'myMsg':Number
+                        },
+                        template:'#bbb',
+                        methods:{
+                            send(){
+                                //用这个方法把子组件数据给父组件
+                                this.$emit('child-msg',this.a);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

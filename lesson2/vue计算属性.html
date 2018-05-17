@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue计算属性</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        a => {{a}}
+        <br>
+        b => {{b}}
+        <br>
+        c => {{c}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                a:1
+            },
+            computed:{
+                b:function () {//默认调用的是get
+                    //业务逻辑代码
+                    return this.a+1;
+                },
+                c:{
+                    //如果直接c:后接一个function，则默认是get的方法
+                    get:function () {
+                        return this.a+2;
+                    },
+                    set:function (val) {
+                        this.a = val;
+                    }
+                }
+            }
+        });
+
+        document.onclick = function () {
+            vm.a = 101;
+        };
+        document.ondblclick = function () {
+            vm.c = 123;
+        }
+    </script>
+</body>
+</html>
