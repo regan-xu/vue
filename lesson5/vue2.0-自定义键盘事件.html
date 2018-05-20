@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-自定义键盘事件</title>
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        //Vue.directive('on').keyCodes.ctrl=17;//1.0做法
+        Vue.config.keyCodes.ctrl=17;
+
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                },
+                methods:{
+                    change(){
+                        alert('改变了');
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" @keyup.ctrl="change">
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

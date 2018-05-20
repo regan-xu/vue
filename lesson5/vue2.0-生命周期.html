@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-生命周期</title>
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script>
+
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    msg:'welcome vue2.0'
+                },
+                methods:{
+                    update(){
+                        this.msg = '大家好';
+                    },
+                    destroy(){
+                        this.$destroy();
+                    }
+                },
+                beforeCreate(){
+                    console.log('组件实例刚刚被创建');
+                },
+                created(){
+                    console.log('实例已经创建完成');
+                },
+                beforeMount(){
+                    console.log('模板编译之前');
+                },
+                mounted(){
+                    console.log('模板编译完成');
+                },
+                beforeUpdate(){
+                    console.log('组件跟新之前');
+                },
+                updated(){
+                    console.log('组件跟新完毕');
+                },
+                beforeDestroy(){
+                    console.log('组件销毁之前');
+                },
+                destroyed(){
+                    console.log('组件销毁之后');
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="更新数据" @click="update">
+        <input type="button" value="销毁组件" @click="destroy">
+        {{msg}}
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

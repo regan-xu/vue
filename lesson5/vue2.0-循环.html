@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-循环</title>
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    list:['width','height','border'],
+                    json:{
+                        a:'apple',
+                        b:'banana',
+                        c:'cell'
+                    }
+                },
+                methods:{
+                    add(){
+                        this.list.push('background');
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="添加" @click="add">
+        <ul>
+            <!--2.0默认可以添加重复数据，去除了track-by=''代替的是 :key='' -->
+            <!--2.0去除隐式的$index,需要的话自己手动加，还去除了$key-->
+            <!--(val,index)这个位置与1.0对调了，为了贴近原生js写法-->
+            <li v-for="(val,index) in list">
+                {{val}}     {{index}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(val,key) in json">
+                {{val}}  {{key}}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

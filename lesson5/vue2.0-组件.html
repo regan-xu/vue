@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-组件</title>
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        //Vue.extend有变化，不推荐用
+        Vue.component('my-aaa',{
+            template:'#aaa'
+        });
+
+        var Home = {  //这是2.0组件,类似1.0的Vue.extend，还要注册一下
+            template:'#aaa'
+        };
+
+        Vue.component('my-aaa2',Home);
+
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    msg:'welcome vue2.0'
+                },
+                components:{
+                    'aaa':Home
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <template id="aaa">
+        <!--在每个组件模板，不在支持片段代码-->
+        <!--2.0必须有根元素，包裹住所有的代码，即这里的div-->
+        <div>
+            <h3>我是组件</h3>
+            <strong>我是加粗标签</strong>
+        </div>
+    </template>
+    <div id="box">
+        <my-aaa></my-aaa>
+        {{msg}}
+        <my-aaa2></my-aaa2>
+        <aaa></aaa>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

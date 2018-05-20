@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue2.0-过滤器</title>
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <!--2.0内置过滤器全部删除了-->
+    <script>
+        Vue.filter('toDou',function (n,a,b) {
+                alert(a+','+b);
+                return n<10?'0'+n:''+n;
+        });
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    msg:{a:1,b:2,c:3},
+                    msg2:9
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        {{msg}}
+        <br>
+        <!--过滤器传参方式不是用空格隔开了，用函数的方式-->
+        {{msg2 | toDou('12','5')}}
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
