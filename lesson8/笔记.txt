@@ -1,0 +1,23 @@
+使用别人组件：
+
+Vue.use(Vuesource)
+Vue.use(VueRoute)
+Vue.use(MintUI)
+
+axios
+
+-----------------------------------------------------
+自定义vue全局组件：
+    使用：
+        <Loading></Loading>
+-----------------------------------------------------
+npm install cnpm -g
+-----------------------------------------------------
+个人习惯：
+    |-loading/
+            |-index.js      //导出组件，并且install
+            |-Loading.vue   //Loading组件
+
+主要文件index.js代码：
+    import LoadingComponent from './Loading.vue'
+-----------------------------------------------------
