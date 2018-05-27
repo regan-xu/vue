@@ -1,0 +1,48 @@
+vue仿手机新闻站：
+    1.拿到静态页面，直接用vue边布局，边写
+    2.假数据
+
+    没有用任何UI组件，切图完成
+
+做项目基本流程：
+    1.规划组件结构
+        Nav.vue
+        Header.vue
+        Home.vue
+        ...
+    2.编写对应路由
+        vue-router
+    3.具体些每个组件功能
+
+建议：一些公共文件jQuery，jQuery插件，一般在index.html文件里面引入
+
+    main.js     require()/import
+
+项目需要模块：
+    vuex
+    vue-router
+    axios
+-----------------------------------------------
+重新缕缕：
+    assets  ->      静态资源 img,css,js
+
+    想在js里面引入css模块：style-loader,css-loader
+
+new VueRouter({
+    routes:路由具体配置
+});
+
+watch:{ //当路由发生变化的时候
+    $route(){
+        alert(1)
+    }
+}
+-----------------------------------------------
+axios:可以配置
+        目前为止：axios，不能Vues.use(axios)
+
+        axios.interceptors.request.use();//发送请求配置
+        axios.interceptors.response.use();//接收请求配置
+
+        axios.defaults.headers.post['Content-Type'] =
+            'appplication/x-www-form-urlencoded';//设置post头部信息
